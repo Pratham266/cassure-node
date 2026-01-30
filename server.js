@@ -8,10 +8,7 @@ const __dirname = dirname(__filename);
 
 dotenv.config({ path: join(__dirname, '.env') });
 
-// DEBUG: Verify env loaded
-console.log('🔍 DEBUG - .env loaded from:', join(__dirname, '.env'));
-console.log('🔍 DEBUG - GOOGLE_PROJECT_ID:', process.env.GOOGLE_PROJECT_ID);
-console.log('🔍 DEBUG - PORT:', process.env.PORT);
+
 
 
 import express from 'express';

@@ -84,17 +84,6 @@ export const validatePageCount = async (req, res, next) => {
       }
     }
     
-    const maxPages = parseInt(process.env.MAX_PAGES) || 20;
-    
-    if (pageCount > maxPages) {
-      // Delete the uploaded file
-      fs.unlinkSync(req.file.path);
-      
-      return res.status(400).json({
-        success: false,
-        message: `PDF exceeds maximum page limit of ${maxPages} pages. Your file has ${pageCount} pages.`
-      });
-    }
 
     // Attach page count to request
     req.pageCount = pageCount;

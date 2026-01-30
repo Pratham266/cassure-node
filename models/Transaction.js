@@ -45,21 +45,6 @@ const transactionSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
-
-// Encrypt sensitive fields - DISABLED FOR NOW
-// TODO: Re-enable encryption with proper key configuration
-// Note: mongoose-encryption requires specific key format
-/*
-const encKey = process.env.ENCRYPTION_KEY;
-if (encKey && encKey.length >= 32) {
-  transactionSchema.plugin(encrypt, {
-    secret: encKey,
-    encryptedFields: ['description', 'rawData']
-  });
-}
-*/
-console.log('ℹ️  Transaction encryption is currently disabled.');
-
 // Compound index for efficient queries
 transactionSchema.index({ userId: 1, statementId: 1, date: -1 });
 
