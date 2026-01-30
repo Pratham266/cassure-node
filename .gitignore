@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.DS_Store
+uploads/temp/*
+!uploads/temp/.gitkeep
+*.log
+
+# Google Service Account Key (IMPORTANT - Never commit!)
+service-account-key.json
+*-service-account-*.json
