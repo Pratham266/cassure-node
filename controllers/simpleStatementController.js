@@ -26,11 +26,14 @@ export const uploadAndProcess = async (req, res) => {
       formData.append('password', req.body.password);
     }
     
-    // Call Python Scraper Service
+    // Call Python Scraper Service with timeout protection
     const pythonServiceUrl = process.env.PYTHON_SERVICE_URL ;
     const pythonApiKey = process.env.PYTHON_API_KEY;
 
     console.log(`🚀 Forwarding to Python Scraper: ${pythonServiceUrl}`);
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 120000); // 2 minute timeout
 
     const response = await fetch(pythonServiceUrl, {
       method: 'POST',
@@ -38,8 +41,9 @@ export const uploadAndProcess = async (req, res) => {
         'X-API-KEY': pythonApiKey,
         ...formData.getHeaders()
       },
-      body: formData
-    });
+      body: formData,
+      signal: controller.signal
+    }).finally(() => clearTimeout(timeout));
 
     if (!response.ok) {
         let errorText = await response.text();
