@@ -49,7 +49,7 @@ async function processDocumentAsync(statementId, filePath, userId) {
     formData.append('file', fs.createReadStream(filePath));
     
     // Call Python Scraper Service
-    const pythonServiceUrl = process.env.PYTHON_SERVICE_URL || 'http://127.0.0.1:8000/parse';
+    const pythonServiceUrl = process.env.PYTHON_SERVICE_URL ;
     const pythonApiKey = process.env.PYTHON_API_KEY;
 
     const response = await fetch(pythonServiceUrl, {

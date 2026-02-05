@@ -27,7 +27,7 @@ export const uploadAndProcess = async (req, res) => {
     }
     
     // Call Python Scraper Service
-    const pythonServiceUrl = process.env.PYTHON_SERVICE_URL || 'http://127.0.0.1:8000/parse';
+    const pythonServiceUrl = process.env.PYTHON_SERVICE_URL ;
     const pythonApiKey = process.env.PYTHON_API_KEY;
 
     console.log(`🚀 Forwarding to Python Scraper: ${pythonServiceUrl}`);
