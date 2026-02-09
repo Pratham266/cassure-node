@@ -52,6 +52,11 @@ import transactionRoutes from './routes/transactions.js';
 import simpleStatementRoutes from './routes/simpleStatements.js';
 import helpRoutes from './routes/help.js';
 
+// Root route for cron/health check
+app.get('/', (req, res) => {
+  res.status(200).send('CAssure Backend is Alive! 🚀');
+});
+
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/statements', statementRoutes);
