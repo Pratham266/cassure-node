@@ -43,6 +43,10 @@ const statementSchema = new mongoose.Schema({
   errorMessage: {
     type: String,
     default: ''
+  },
+  isAccurate: {
+    type: Boolean,
+    default: true
   }
 }, {
   timestamps: true
