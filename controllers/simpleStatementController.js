@@ -236,9 +236,14 @@ export const uploadAndProcess = async (req, res) => {
 // Get Dashboard Data
 export const getDashboardStats = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
     const stats = await Statement.find({ userId: req.user.id })
       .sort({ uploadDate: -1 })
-      .limit(20);
+      .skip(skip)
+      .limit(limit);
 
     const totalStatements = await Statement.countDocuments({ userId: req.user.id });
     const inaccurateStatements = await Statement.countDocuments({
@@ -254,6 +259,12 @@ export const getDashboardStats = async (req, res) => {
     res.status(200).json({
       success: true,
       data: stats,
+      pagination: {
+        total: totalStatements,
+        page,
+        limit,
+        pages: Math.ceil(totalStatements / limit)
+      },
       summary: {
         totalStatements,
         inaccurateStatements,
