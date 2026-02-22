@@ -82,12 +82,14 @@ export const uploadAndProcess = async (req, res) => {
               if (txn.date) {
                 const parsed = moment(txn.date, [
                   'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY',
-                  'DD/MM/YY', 'DD-MM-YY', 'D-M-YYYY', 'D-M-YY',
+                  'DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YY', 'D-M-YYYY', 'D-M-YY',
+                  'DD-MMM-YYYY', 'DD-MMM-YY', 'DD/MMM/YYYY',
+                  'DD MMM YYYY hh:mm A', 'DD MMM YYYY', 'DD MMM YY',
                   moment.ISO_8601
                 ]);
                 if (parsed.isValid()) txn.date = parsed.format('DD-MM-YYYY');
               }
-              // Amount Normalization
+              // Amount Normalization 
               if (txn.amount !== undefined && txn.amount !== null) {
                 let amountVal = parseFloat(String(txn.amount).replace(/,/g, ''));
                 if (!isNaN(amountVal)) {
